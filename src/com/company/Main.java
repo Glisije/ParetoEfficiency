@@ -114,10 +114,10 @@ public class Main {
         }
     }
 
-    public static void upDown(Camera[] mas){
+    public static void upDown(Camera[] mas) {
         for (int i = 0; i < mas.length; i++) {
             if (mas[i].price <= 200000 && mas[i].iso >= 600) {
-                mas[i].upDown +=1;
+                mas[i].upDown += 1;
             }
         }
         //Элементы, подходящие под границы - попадают в начало массива
@@ -133,6 +133,44 @@ public class Main {
         }
     }
 
+    public static Camera[] SUB(Camera[] mas) {
+        Camera[] mas1 = new Camera[2];
+        //Проверка по границам
+        for (int i = 0; i < mas.length; i++) {
+            if (mas[i].crop <= 1.5 && mas[i].resolution >= 4 && mas[i].fps >= 30 && mas[i].iso >= 300 && mas[i].deep >= 10420 && mas[i].speed >= 200 && mas[i].stab) {
+                mas[i].sub += 1;
+            }
+        }
+        //Элементы, подходящие под границы - попадают в начало массива
+        for (int i = 1; i < mas.length; i++) {
+            int valueToSort = mas[i].sub;
+            Camera temp = mas[i];
+            int j = i;
+            while (j > 0 && mas[j - 1].sub < valueToSort) {
+                mas[j] = mas[j - 1];
+                j--;
+            }
+            mas[j] = temp;
+        }
+        //Записываем камеры прошедшие границы в отдельный массив
+        for (int i = 0; i < mas1.length; i++) {
+            mas1[i] = mas[i];
+        }
+
+        //Сортируем камеры по главному критерию - цена
+        for (int i = 1; i < mas1.length; i++) {
+            int valueToSort = mas1[i].price;
+            Camera temp = mas1[i];
+            int j = i;
+            while (j > 0 && mas1[j - 1].price > valueToSort) {
+                mas1[j] = mas1[j - 1];
+                j--;
+            }
+            mas1[j] = temp;
+        }
+
+        return mas1;
+    }
 
     public static void main(String[] args) {
 
@@ -151,6 +189,7 @@ public class Main {
         Camera[] parMas = new Camera[4];
         Camera[] upMas = new Camera[6];
         Camera[] upMasPar = new Camera[1];
+        Camera[] subMas = new Camera[2];
 
 
         System.out.println("Изначальная таблица:");
@@ -175,14 +214,20 @@ public class Main {
         print(upMas);
 
         System.out.println("Из них Парето-оптимальные: ");
-        for (int i = 0; i < upMasPar.length; i++){
+        for (int i = 0; i < upMasPar.length; i++) {
             if (upMas[i].dfPar == 1) {
                 upMasPar[i] = upMas[i];
-            }
-            else break;
+            } else break;
         }
 
         print(upMasPar);
+
+
+        subMas = SUB(mainMas); //Производится субоптимизация
+
+        System.out.println("Варианты, прошедшие субоптимизацию: ");
+
+        print(subMas);
 
 
     }
