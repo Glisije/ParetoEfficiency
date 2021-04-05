@@ -1,172 +1,144 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Main {
 
-    public static void print(Camera[] mas) {
+    public static void print(ArrayList<Camera> mas) {
         System.out.println("----------------------------------------------------------------------------------------------");
         System.out.println("|  Model  | Crop | Resolution | FPS | Native ISO | Color Deep | Mb/s | Stabilization | Price |");
         System.out.println("----------------------------------------------------------------------------------------------");
-        for (int i = 0; i < mas.length; i++) {
-            System.out.println("| " + mas[i].pName + " | " + mas[i].crop + "  |     " + mas[i].resolution + "      | " + mas[i].fps + "  |     " + mas[i].iso + "    |   " + mas[i].deep + "    | " + mas[i].speed + "  |    " + mas[i].stab + "      | " + mas[i].price + " |");
+        for (int i = 0; i < mas.size(); i++) {
+            System.out.println("| " + mas.get(i).pName + " | " + mas.get(i).crop + "  |     " + mas.get(i).resolution + "      | " + mas.get(i).fps + "  |     " + mas.get(i).iso + "    |   " + mas.get(i).deep + "    | " + mas.get(i).speed + "  |    " + mas.get(i).stab + "      | " + mas.get(i).price + " |");
         }
         System.out.println("----------------------------------------------------------------------------------------------");
     }
 
-    public static void firstPar(Camera[] mas) {
-        for (int i = 0; i < mas.length; i++) {
-            for (int j = 0; j < mas.length; j++) {
+    public static void firstPar(ArrayList<Camera> mas) {
+        for (int i = 0; i < mas.size(); i++) {
+            for (int j = 0; j < mas.size(); j++) {
 
-                mas[i].fPar = 0;
-                mas[j].fPar = 0;
+                mas.get(i).fPar = 0;
+                mas.get(j).fPar = 0;
 
-                if (mas[i].price > mas[j].price) {
-                    mas[j].fPar += 1;
-                } else if (mas[i].price < mas[j].price) {
-                    mas[i].fPar += 1;
+                if (mas.get(i).price > mas.get(j).price) {
+                    mas.get(j).fPar += 1;
+                } else if (mas.get(i).price < mas.get(j).price) {
+                    mas.get(i).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].crop > mas[j].crop) {
-                    mas[j].fPar += 1;
-                } else if (mas[i].crop < mas[j].crop) {
-                    mas[i].fPar += 1;
+                if (mas.get(i).crop > mas.get(j).crop) {
+                    mas.get(j).fPar += 1;
+                } else if (mas.get(i).crop < mas.get(j).crop) {
+                    mas.get(i).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].resolution > mas[j].resolution) {
-                    mas[i].fPar += 1;
-                } else if (mas[i].resolution < mas[j].resolution) {
-                    mas[j].fPar += 1;
+                if (mas.get(i).resolution > mas.get(j).resolution) {
+                    mas.get(i).fPar += 1;
+                } else if (mas.get(j).resolution < mas.get(j).resolution) {
+                    mas.get(j).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].fps > mas[j].fps) {
-                    mas[i].fPar += 1;
-                } else if (mas[i].fps < mas[j].fps) {
-                    mas[i].fPar += 1;
+                if (mas.get(i).fps > mas.get(j).fps) {
+                    mas.get(i).fPar += 1;
+                } else if (mas.get(i).fps < mas.get(j).fps) {
+                    mas.get(j).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].iso > mas[j].iso) {
-                    mas[i].fPar += 1;
-                } else if (mas[i].iso < mas[j].iso) {
-                    mas[j].fPar += 1;
+                if (mas.get(i).iso > mas.get(j).iso) {
+                    mas.get(i).fPar += 1;
+                } else if (mas.get(i).iso < mas.get(j).iso) {
+                    mas.get(j).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].deep > mas[j].deep) {
-                    mas[i].fPar += 1;
-                } else if (mas[i].deep < mas[j].deep) {
-                    mas[j].fPar += 1;
+                if (mas.get(i).deep > mas.get(j).deep) {
+                    mas.get(i).fPar += 1;
+                } else if (mas.get(i).deep < mas.get(j).deep) {
+                    mas.get(j).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].speed > mas[j].speed) {
-                    mas[i].fPar += 1;
-                } else if (mas[i].speed < mas[j].speed) {
-                    mas[j].fPar += 1;
+                if (mas.get(i).speed > mas.get(j).speed) {
+                    mas.get(i).fPar += 1;
+                } else if (mas.get(i).speed < mas.get(j).speed) {
+                    mas.get(j).fPar += 1;
                 } else {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].stab && !mas[j].stab) {
-                    mas[i].fPar += 1;
-                } else if (!mas[i].stab && mas[j].stab) {
-                    mas[j].fPar += 1;
-                } else if (mas[i].stab && mas[j].stab) {
-                    mas[i].fPar += 1;
-                    mas[j].fPar += 1;
+                if (mas.get(i).stab && !mas.get(j).stab) {
+                    mas.get(i).fPar += 1;
+                } else if (!mas.get(i).stab && mas.get(j).stab) {
+                    mas.get(j).fPar += 1;
+                } else if (mas.get(i).stab && mas.get(j).stab) {
+                    mas.get(i).fPar += 1;
+                    mas.get(j).fPar += 1;
                 }
 
-                if (mas[i].fPar == 16) {
-                    mas[i].dfPar += 1;
-                } else if (mas[j].fPar == 16) {
-                    mas[j].dfPar += 1;
-                } else if (mas[i].fPar == 16 && mas[j].fPar == 16) {
-                    mas[i].dfPar += 1;
-                    mas[j].dfPar += 1;
+                if (mas.get(i).fPar == 16) {
+                    mas.get(i).dfPar += 1;
+                } else if (mas.get(j).fPar == 16) {
+                    mas.get(j).dfPar += 1;
+                } else if (mas.get(i).fPar == 16 && mas.get(j).fPar == 16) {
+                    mas.get(i).dfPar += 1;
+                    mas.get(j).dfPar += 1;
                 }
             }
-        }
-        //Парето-оптимальные варианты помещаются в начало массива
-        for (int i = 1; i < mas.length; i++) {
-            int valueToSort = mas[i].dfPar;
-            Camera temp = mas[i];
-            int j = i;
-            while (j > 0 && mas[j - 1].dfPar < valueToSort) {
-                mas[j] = mas[j - 1];
-                j--;
-            }
-            mas[j] = temp;
         }
     }
 
-    public static void upDown(Camera[] mas) {
-        for (int i = 0; i < mas.length; i++) {
-            if (mas[i].price <= 200000 && mas[i].iso >= 600) {
-                mas[i].upDown += 1;
+    public static void upDown(ArrayList<Camera> mas) {
+        for (int i = 0; i < mas.size(); i++) {
+            if (mas.get(i).price <= 200000 && mas.get(i).iso >= 600) {
+                mas.get(i).upDown += 1;
             }
-        }
-        //Элементы, подходящие под границы - попадают в начало массива
-        for (int i = 1; i < mas.length; i++) {
-            int valueToSort = mas[i].upDown;
-            Camera temp = mas[i];
-            int j = i;
-            while (j > 0 && mas[j - 1].upDown < valueToSort) {
-                mas[j] = mas[j - 1];
-                j--;
-            }
-            mas[j] = temp;
         }
     }
 
-    public static Camera[] SUB(Camera[] mas) {
-        Camera[] mas1 = new Camera[2];
+    public static ArrayList<Camera> SUB(ArrayList<Camera> mas) {
+        ArrayList<Camera> mas1 = new ArrayList<>();
         //Проверка по границам
-        for (int i = 0; i < mas.length; i++) {
-            if (mas[i].crop <= 1.5 && mas[i].resolution >= 4 && mas[i].fps >= 30 && mas[i].iso >= 300 && mas[i].deep >= 10420 && mas[i].speed >= 200 && mas[i].stab) {
-                mas[i].sub += 1;
+        for (int i = 0; i < mas.size(); i++) {
+            if (mas.get(i).crop <= 1.5 && mas.get(i).resolution >= 4 && mas.get(i).fps >= 30 && mas.get(i).iso >= 300 && mas.get(i).deep >= 10420 && mas.get(i).speed >= 200 && mas.get(i).stab) {
+                mas.get(i).sub += 1;
             }
         }
-        //Элементы, подходящие под границы - попадают в начало массива
-        for (int i = 1; i < mas.length; i++) {
-            int valueToSort = mas[i].sub;
-            Camera temp = mas[i];
-            int j = i;
-            while (j > 0 && mas[j - 1].sub < valueToSort) {
-                mas[j] = mas[j - 1];
-                j--;
-            }
-            mas[j] = temp;
-        }
+
         //Записываем камеры прошедшие границы в отдельный массив
-        for (int i = 0; i < mas1.length; i++) {
-            mas1[i] = mas[i];
+        for (int i = 0; i < mas.size(); i++) {
+            if (mas.get(i).sub==1) {
+                mas1.add(mas.get(i));
+            }
         }
 
         //Сортируем камеры по главному критерию - цена
-        for (int i = 1; i < mas1.length; i++) {
-            int valueToSort = mas1[i].price;
-            Camera temp = mas1[i];
+        for (int i = 1; i < mas1.size(); i++) {
+            int valueToSort = mas1.get(i).price;
+            Camera temp = mas1.get(i);
             int j = i;
-            while (j > 0 && mas1[j - 1].price > valueToSort) {
-                mas1[j] = mas1[j - 1];
+            while (j > 0 && mas1.get(j - 1).price > valueToSort) {
+                mas1.set(j, mas1.get(j-1));
                 j--;
             }
-            mas1[j] = temp;
+            mas1.set(j, temp);
         }
 
         return mas1;
@@ -185,11 +157,22 @@ public class Main {
         Camera A7sI = new Camera("A7sI", "  A7sI ", 98000, 1, 4, 30, 100, 8420, 28, false);
         Camera a6600 = new Camera("a6600", " a6600 ", 94000, 1.5, 4, 30, 100, 8420, 200, true);
 
-        Camera[] mainMas = new Camera[]{XT4, XT3, XT30, BMPCC6K, BMPCC4K, BMMCC, A7sIII, A7sII, A7sI, a6600};
-        Camera[] parMas = new Camera[4];
-        Camera[] upMas = new Camera[6];
-        Camera[] upMasPar = new Camera[1];
-        Camera[] subMas = new Camera[2];
+        ArrayList<Camera> mainMas = new ArrayList<>();
+        mainMas.add(XT4);
+        mainMas.add(XT3);
+        mainMas.add(XT30);
+        mainMas.add(BMPCC6K);
+        mainMas.add(BMPCC4K);
+        mainMas.add(BMMCC);
+        mainMas.add(A7sIII);
+        mainMas.add(A7sII);
+        mainMas.add(A7sI);
+        mainMas.add(a6600);
+
+        ArrayList<Camera> parMas = new ArrayList<>();
+        ArrayList<Camera> upMas = new ArrayList<>();
+        ArrayList<Camera> upMasPar = new ArrayList<>();
+        ArrayList<Camera> subMas = new ArrayList<>();
 
 
         System.out.println("Изначальная таблица:");
@@ -197,8 +180,11 @@ public class Main {
 
         firstPar(mainMas); //Определяются Парето оптимальыне варианты
 
-        for (int i = 0; i < parMas.length; i++) {//Парето-оптимаьные варианты записываются в отдельный массив
-            parMas[i] = mainMas[i];
+        for (int i = 0; i < mainMas.size(); i++) //Парето-оптимаьные варианты записываются в отдельный массив
+        {
+            if (mainMas.get(i).dfPar==1){
+                parMas.add(mainMas.get(i));
+            }
         }
 
         System.out.println("Парето-оптимальные варианты:");
@@ -206,18 +192,20 @@ public class Main {
 
         upDown(mainMas); //Определяются варианты, подходящие под границы: ISO не меньше 600, цена не более 200.000 руб.
 
-        for (int i = 0; i < upMas.length; i++) {//Варианты, подходящие под границы, записываются в отдельный массив
-            upMas[i] = mainMas[i];
+        for (int i = 0; i < mainMas.size(); i++) {//Варианты, подходящие под границы, записываются в отдельный массив
+            if (mainMas.get(i).upDown==1){
+                upMas.add(mainMas.get(i));
+            }
         }
 
         System.out.println("Варианты, подходящие под границы: ISO не меньше 600, цена не более 200.000 руб.: ");
         print(upMas);
 
         System.out.println("Из них Парето-оптимальные: ");
-        for (int i = 0; i < upMasPar.length; i++) {
-            if (upMas[i].dfPar == 1) {
-                upMasPar[i] = upMas[i];
-            } else break;
+        for (int i = 0; i < upMas.size(); i++) {
+            if (upMas.get(i).dfPar == 1) {
+                upMasPar.add(upMas.get(i));
+            }
         }
 
         print(upMasPar);
