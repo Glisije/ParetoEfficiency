@@ -2,105 +2,139 @@ package com.company;
 
 public class Main {
 
-    public static void print(Camera[] mas){
-        System.out.println("-------------------------------------------------------------------------------------------");
+    public static void print(Camera[] mas) {
+        System.out.println("----------------------------------------------------------------------------------------------");
         System.out.println("|  Model  | Crop | Resolution | FPS | Native ISO | Color Deep | Mb/s | Stabilization | Price |");
-        System.out.println("-------------------------------------------------------------------------------------------");
-        for (int i = 0; i < mas.length; i++){
-            System.out.println("| " + mas[i].pName + " | "  + mas[i].crop + "  |     " + mas[i].resolution + "      | " + mas[i].fps + "  |     " + mas[i].iso + "    |   " + mas[i].deep + "    | " + mas[i].speed + "  |    " + mas[i].stab + "      | " + mas[i].price + " |");
+        System.out.println("----------------------------------------------------------------------------------------------");
+        for (int i = 0; i < mas.length; i++) {
+            System.out.println("| " + mas[i].pName + " | " + mas[i].crop + "  |     " + mas[i].resolution + "      | " + mas[i].fps + "  |     " + mas[i].iso + "    |   " + mas[i].deep + "    | " + mas[i].speed + "  |    " + mas[i].stab + "      | " + mas[i].price + " |");
         }
-        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------");
     }
 
+    public static void firstPar(Camera[] mas) {
+        for (int i = 0; i < mas.length; i++) {
+            for (int j = 0; j < mas.length; j++) {
 
-    public static void firstPar (Camera cam1, Camera cam2){
+                mas[i].fPar = 0;
+                mas[j].fPar = 0;
 
-        cam1.fPar = 0;
-        cam2.fPar = 0;
+                if (mas[i].price > mas[j].price) {
+                    mas[j].fPar += 1;
+                } else if (mas[i].price < mas[j].price) {
+                    mas[i].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
 
-        if (cam1.price > cam2.price){
-            cam2.fPar+=1;
-        } else if (cam1.price < cam2.price){
-            cam1.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
+                if (mas[i].crop > mas[j].crop) {
+                    mas[j].fPar += 1;
+                } else if (mas[i].crop < mas[j].crop) {
+                    mas[i].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].resolution > mas[j].resolution) {
+                    mas[i].fPar += 1;
+                } else if (mas[i].resolution < mas[j].resolution) {
+                    mas[j].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].fps > mas[j].fps) {
+                    mas[i].fPar += 1;
+                } else if (mas[i].fps < mas[j].fps) {
+                    mas[i].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].iso > mas[j].iso) {
+                    mas[i].fPar += 1;
+                } else if (mas[i].iso < mas[j].iso) {
+                    mas[j].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].deep > mas[j].deep) {
+                    mas[i].fPar += 1;
+                } else if (mas[i].deep < mas[j].deep) {
+                    mas[j].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].speed > mas[j].speed) {
+                    mas[i].fPar += 1;
+                } else if (mas[i].speed < mas[j].speed) {
+                    mas[j].fPar += 1;
+                } else {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].stab && !mas[j].stab) {
+                    mas[i].fPar += 1;
+                } else if (!mas[i].stab && mas[j].stab) {
+                    mas[j].fPar += 1;
+                } else if (mas[i].stab && mas[j].stab) {
+                    mas[i].fPar += 1;
+                    mas[j].fPar += 1;
+                }
+
+                if (mas[i].fPar == 16) {
+                    mas[i].dfPar += 1;
+                } else if (mas[j].fPar == 16) {
+                    mas[j].dfPar += 1;
+                } else if (mas[i].fPar == 16 && mas[j].fPar == 16) {
+                    mas[i].dfPar += 1;
+                    mas[j].dfPar += 1;
+                }
+            }
         }
-
-        if (cam1.crop > cam2.crop){
-            cam2.fPar+=1;
-        } else if (cam1.crop < cam2.crop){
-            cam1.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
+        //Парето-оптимальные варианты помещаются в начало массива
+        for (int i = 1; i < mas.length; i++) {
+            int valueToSort = mas[i].dfPar;
+            Camera temp = mas[i];
+            int j = i;
+            while (j > 0 && mas[j - 1].dfPar < valueToSort) {
+                mas[j] = mas[j - 1];
+                j--;
+            }
+            mas[j] = temp;
         }
+    }
 
-        if (cam1.resolution > cam2.resolution){
-            cam1.fPar+=1;
-        } else if (cam1.resolution < cam2.resolution){
-            cam2.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
+    public static void upDown(Camera[] mas){
+        for (int i = 0; i < mas.length; i++) {
+            if (mas[i].price <= 200000 && mas[i].iso >= 600) {
+                mas[i].upDown +=1;
+            }
         }
-
-        if (cam1.fps > cam2.fps){
-            cam1.fPar+=1;
-        } else if (cam1.fps < cam2.fps){
-            cam2.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
+        //Элементы, подходящие под границы - попадают в начало массива
+        for (int i = 1; i < mas.length; i++) {
+            int valueToSort = mas[i].upDown;
+            Camera temp = mas[i];
+            int j = i;
+            while (j > 0 && mas[j - 1].upDown < valueToSort) {
+                mas[j] = mas[j - 1];
+                j--;
+            }
+            mas[j] = temp;
         }
-
-        if (cam1.iso > cam2.iso){
-            cam1.fPar+=1;
-        } else if (cam1.iso < cam2.iso){
-            cam2.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
-        }
-
-        if (cam1.deep > cam2.deep){
-            cam1.fPar+=1;
-        } else if (cam1.deep < cam2.deep){
-            cam2.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
-        }
-
-        if (cam1.speed >  cam2.speed){
-            cam1.fPar+=1;
-        } else if (cam1.speed < cam2.speed){
-            cam2.fPar+=1;
-        } else {
-            cam1.fPar+=1;
-            cam2.fPar+=1;
-        }
-
-        if (cam1.stab && !cam2.stab){
-            cam1.fPar+=1;
-        } else if (!cam1.stab && cam2.stab){
-            cam2.fPar+=1;
-        } else if (cam1.stab && cam2.stab){
-            cam1.fPar+=1;
-            cam2.fPar+=1;
-        }
-
-        if (cam1.fPar==8){
-            cam1.dfPar+=1;
-        } else if (cam2.fPar==8){
-            cam2.dfPar+=1;
-        }
-
     }
 
 
     public static void main(String[] args) {
-
 
         Camera XT4 = new Camera("X-T4", "  X-T4 ", 105000, 1.5, 4, 60, 640, 10422, 400, true);
         Camera XT3 = new Camera("X-T3", "  X-T3 ", 82000, 1.5, 4, 60, 640, 10422, 400, false);
@@ -113,16 +147,42 @@ public class Main {
         Camera A7sI = new Camera("A7sI", "  A7sI ", 98000, 1, 4, 30, 100, 8420, 28, false);
         Camera a6600 = new Camera("a6600", " a6600 ", 94000, 1.5, 4, 30, 100, 8420, 200, true);
 
-        Camera[] mainMas = {XT4, XT3, XT3, BMPCC6K, BMPCC4K, BMMCC, A7sIII, A7sII, A7sI, a6600};
+        Camera[] mainMas = new Camera[]{XT4, XT3, XT30, BMPCC6K, BMPCC4K, BMMCC, A7sIII, A7sII, A7sI, a6600};
+        Camera[] parMas = new Camera[4];
+        Camera[] upMas = new Camera[6];
+        Camera[] upMasPar = new Camera[1];
 
+
+        System.out.println("Изначальная таблица:");
         print(mainMas);
 
-        for (int i = 0; i < mainMas.length; i++) {
-            for (int j = 0; j < mainMas.length; i++) {
-                firstPar(mainMas[i], mainMas[j]);
-            }
-            System.out.println(mainMas[i].name + " " + mainMas[i].dfPar);
+        firstPar(mainMas); //Определяются Парето оптимальыне варианты
+
+        for (int i = 0; i < parMas.length; i++) {//Парето-оптимаьные варианты записываются в отдельный массив
+            parMas[i] = mainMas[i];
         }
+
+        System.out.println("Парето-оптимальные варианты:");
+        print(parMas);
+
+        upDown(mainMas); //Определяются варианты, подходящие под границы: ISO не меньше 600, цена не более 200.000 руб.
+
+        for (int i = 0; i < upMas.length; i++) {//Варианты, подходящие под границы, записываются в отдельный массив
+            upMas[i] = mainMas[i];
+        }
+
+        System.out.println("Варианты, подходящие под границы: ISO не меньше 600, цена не более 200.000 руб.: ");
+        print(upMas);
+
+        System.out.println("Из них Парето-оптимальные: ");
+        for (int i = 0; i < upMasPar.length; i++){
+            if (upMas[i].dfPar == 1) {
+                upMasPar[i] = upMas[i];
+            }
+            else break;
+        }
+
+        print(upMasPar);
 
 
     }

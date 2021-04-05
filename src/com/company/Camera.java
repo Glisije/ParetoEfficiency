@@ -13,6 +13,8 @@ public class Camera {
     boolean stab;
     int fPar;
     int dfPar;
+    int upDown;
+    int dUpDown;
 
 
     Camera(String name, String pName, int price, double crop, int resolution, int fps, int iso, int deep, int speed, boolean stab) {
@@ -27,6 +29,8 @@ public class Camera {
         this.speed = speed;
         this.stab = stab;
         this.dfPar = 0;
+        this.upDown = 0;
+        this.dUpDown = 0;
     }
 
 }
