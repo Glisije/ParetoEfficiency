@@ -3,7 +3,7 @@ package com.company;
 public class Camera {
     String name;
     String pName;
-    int price;
+    int weight;
     double crop;
     int resolution;
     int fps;
@@ -17,10 +17,10 @@ public class Camera {
     int sub;
 
 
-    Camera(String name, String pName, int price, double crop, int resolution, int fps, int iso, int deep, int speed, boolean stab) {
+    Camera(String name, String pName, int weight, double crop, int resolution, int fps, int iso, int deep, int speed, boolean stab) {
         this.name=name;
         this.pName=pName;
-        this.price = price;
+        this.weight = weight;
         this.crop = crop;
         this.resolution = resolution;
         this.fps = fps;
