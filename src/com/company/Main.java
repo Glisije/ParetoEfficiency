@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Main {
 
@@ -130,7 +131,7 @@ public class Main {
         }
 
         //Сортируем камеры по главному критерию - цена
-        for (int i = 1; i < mas1.size(); i++) {
+        for (int i = 0; i < mas1.size(); i++) {
             int valueToSort = mas1.get(i).price;
             Camera temp = mas1.get(i);
             int j = i;
@@ -141,6 +142,44 @@ public class Main {
             mas1.set(j, temp);
         }
 
+        return mas1;
+    }
+
+    public static ArrayList<Camera> leks(ArrayList<Camera> mas) {
+        ArrayList<Camera> mas1 = new ArrayList<>();
+
+        // Проверка по первому параметру
+        for (int i = 0; i < mas.size(); i++) {
+            if (mas.get(i).crop == 1) {
+                mas1.add(mas.get(i));
+            }
+        }
+        // Проверка по второму параметру
+        if (mas1.size() > 1) {
+            for (int i = 0; i < mas1.size(); i++) {
+                if (!mas1.get(i).stab) {
+                    mas1.remove(i);
+                }
+            }
+        }
+        // Сортировка по третьему параметру
+        if (mas1.size() > 1) {
+            for (int i = 0; i < mas1.size(); i++) {
+                int valueToSort = mas1.get(i).fps;
+                Camera temp = mas1.get(i);
+                int j = i;
+                while (j > 0 && mas1.get(j - 1).fps < valueToSort) {
+                    mas1.set(j, mas1.get(j - 1));
+                    j--;
+                }
+                mas1.set(j, temp);
+            }
+        }
+
+        //Остается лучший по третьему параметру
+        for (int i = 1; i < mas1.size(); i++) {
+        mas1.remove(i);
+        }
         return mas1;
     }
 
@@ -173,6 +212,8 @@ public class Main {
         ArrayList<Camera> upMas = new ArrayList<>();
         ArrayList<Camera> upMasPar = new ArrayList<>();
         ArrayList<Camera> subMas = new ArrayList<>();
+        ArrayList<Camera> leks = new ArrayList<>();
+
 
 
         System.out.println("Изначальная таблица:");
@@ -218,5 +259,10 @@ public class Main {
         print(subMas);
 
 
+        leks = leks(mainMas); //Производится лексикографическая оптимизация
+
+        System.out.println("Варианты, прошедшие лексикографическую оптимизацию: ");
+
+        print(leks);
     }
 }
